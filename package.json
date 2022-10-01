@@ -1,0 +1,23 @@
+{
+  "name": "practice",
+  "version": "1.0.2",
+  "description": "foobar",
+  "main": "index.js",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WaerXD/practice.git"
+  },
+  "author": "Waer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WaerXD/practice/issues"
+  },
+  "homepage": "https://github.com/WaerXD/practice#readme"
+}

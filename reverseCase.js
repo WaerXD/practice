@@ -1,7 +1,5 @@
-const ps = require("prompt-sync");
-const prompt = ps();
 // номер 2
-reverseCase = (str) => {
+const reverseCase = (str) => {
     let result = "";
   
     for (let i = 0; i < str.length; i++) {
@@ -15,7 +13,7 @@ reverseCase = (str) => {
     }
     return result;
   };
-  
-  let str = prompt("Enter a string > ");
-  console.log(reverseCase(str));
-  
+
+  module.exports = {
+    reverseCase,
+}
