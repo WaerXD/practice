@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json);
 
 app.use((req, res, next) => {
   console.log('URL = ', req.url);
@@ -27,17 +27,17 @@ app.all('/test', (req, res) => {
   res.status(200).json({ message: 'OK!'});
 });
 
-app.all('/sum', (req,res) => {
+app.get('/sum', (req,res) => {
 let sumValue = sum(req.body.num1,req.body.num2);
 res.status(200).json({ sumValue })
 });
 
-app.all('/reverseArray', (req, res) => {
+app.get('/reverseArray', (req, res) => {
     let reversedArray = reverseArray(req.body.array);
     res.status(200).json({ reversedArray });
 });
 
-app.all('/reverseCase', (req, res) => {
+app.get('/reverseCase', (req, res) => {
     let reversedString = reverseCase(req.body.str);
     res.status(200).json({ reversedString });
 });
