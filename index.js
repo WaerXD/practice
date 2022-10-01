@@ -23,8 +23,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.all("/test", (req, res) => {
-  res.status(200).json({ message: "KEK!" });
+app.all("/", (req, res) => {
+  res.status(200).json({ message: "This is a Test API12 request!" });
 });
 
 app.get("/sum", (req, res) => {
