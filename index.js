@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.all("/", (req, res) => {
-  res.status(200).json({ message: "This is a Test API12 request!" });
+  res.status(200).json({ message: "This is a Test API request!" });
 });
 
 app.get("/sum", (req, res) => {
