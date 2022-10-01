@@ -1,34 +1,47 @@
-const ps = require("prompt-sync");
-const prompt = ps();
-
-
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
 const {reverseArray} = require("./reverseArray")
 const {reverseCase} = require("./reverseCase")
 const {sum} = require("./sum")
-//1
-let arr = [];
-let arrEl;
 
-flag = true;
+const app = express();
 
-while(flag){
-    arrEl = prompt("Enter New Array Element / enter 'stop' to exit > ");
-    if(arrEl == "stop"){
-        flag = false;
-    } else {
-        arr.push(arrEl);
-    }
-}
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-console.log(arr);
-console.log(reverseArray(arr));
+app.use((req, res, next) => {
+  console.log('URL = ', req.url);
+  console.log('Original_URL = ', req.originalUrl);
+  console.log('METHOD = ', req.method);
+  console.log('HOST = ', req.headers.host);
+  console.log('IsSecure = ', req.secure);
+  console.log('BODY', req.body);
+  console.log('QUERY', req.query);
 
-//2
-let num1 = parseInt(prompt("Enter Num1 > "), 10);
-let num2 = parseInt(prompt("Enter Num2 > "), 10);
+  next();
+});
 
-console.log(sum(num1, num2));
+app.all('/test', (req, res) => {
+  res.status(200).json({ message: 'OK!'});
+});
 
- //3 
-let str = prompt("Enter a string > ");
-console.log(reverseCase(str));
+app.all('/sum', (req,res) => {
+let sumValue = sum(req.body.num1,req.body.num2);
+res.status(200).json({ sumValue })
+});
+
+app.all('/reverseArray', (req, res) => {
+    let reversedArray = reverseArray(req.body.array);
+    res.status(200).json({ reversedArray });
+});
+
+app.all('/reverseCase', (req, res) => {
+    let reversedString = reverseCase(req.body.str);
+    res.status(200).json({ reversedString });
+});
+
+http.createServer(app).listen(3000, () => {
+  console.log('Server is working on port 3000');
+});
