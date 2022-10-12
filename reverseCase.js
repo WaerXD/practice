@@ -14,6 +14,4 @@ const reverseCase = (str) => {
     return result;
   };
 
-  module.exports = {
-    reverseCase,
-}
+  module.exports = {reverseCase}

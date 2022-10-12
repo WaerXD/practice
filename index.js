@@ -1,12 +1,18 @@
 const express = require("express");
 const http = require("http");
 const cors = require("cors");
-const { reverseArray } = require("./reverseArray");
-const { reverseCase } = require("./reverseCase");
-const { sum } = require("./sum");
+const { engine } = require('express-handlebars');
 
+/*const { reverseArray } = require("./reverseArray");
+const { reverseCase } = require("./reverseCase");
+const { sum } = require("./sum"); */
+
+const PORT = 3000;
 const app = express();
 
+
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,8 +29,32 @@ app.use((req, res, next) => {
   next();
 });
 
-app.all("/", (req, res) => {
-  res.status(200).json({ message: "This is a Test API request!" });
+
+const messages = [];
+
+app.get('/', (req,res) => {
+  res.render("home", {messages} )
+});
+
+app.post('/message', (req,res) => {
+  const messageText = req.body.messageText;
+  messages.push(messageText);
+  res.redirect('/');
+});
+
+app.get('/done',(req, res) => {
+  messages.pop();
+  res.status(200).redirect('/');
+})
+
+http.createServer(app).listen(PORT, () => {
+  console.log(`Server is working on port ${PORT}`);
+});
+
+/*
+app.get("/reverseArray", (req, res) => {
+  let reversedArray = reverseArray(req.body.array);
+  res.status(200).json({ reversedArray });
 });
 
 app.get("/sum", (req, res) => {
@@ -32,16 +62,8 @@ app.get("/sum", (req, res) => {
   res.status(200).json({ sumValue });
 });
 
-app.get("/reverseArray", (req, res) => {
-  let reversedArray = reverseArray(req.body.array);
-  res.status(200).json({ reversedArray });
-});
-
 app.get("/reverseCase", (req, res) => {
   let reversedString = reverseCase(req.body.str);
   res.status(200).json({ reversedString });
 });
-
-http.createServer(app).listen(3000, () => {
-  console.log("Server is working on port 3000");
-});
+ */

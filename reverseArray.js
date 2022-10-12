@@ -6,6 +6,4 @@ const reverseArray = (arr) => {
     return reverseArr;
 }
 
-module.exports = {
-    reverseArray,
-}
+module.exports = {reverseArray}

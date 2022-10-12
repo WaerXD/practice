@@ -1,0 +1,18 @@
+<h1>To Do List</h1>
+
+<ol>
+    {{#each messages}}
+    <li>{{this}}</li>
+    {{/each}}
+</ol>
+
+<form action="/message" method="post">
+    <label for="messageText">ToDo:</label>
+    <input type="text" id="messageText" name="messageText" />
+    <button type="submit">post</button>
+</form>
+
+<form action="/done" method="get">
+    <label for="pop-todo">pop last ToDo message</label>
+    <button type="submit" id="pop-todo">pop</button>
+</form>
